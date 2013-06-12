@@ -1,0 +1,92 @@
+<config>
+    <api>
+        <resources>
+            <integrator_product translate="title" module="rmointegrator">
+                <title>RMO INTEGRATOR</title>
+                <model>rmointegrator/catalog_product_api</model>
+                <acl>integrator/product</acl>
+                <methods>                    
+                    <listCreated translate="title" module="rmointegrator">
+                        <title>Retrieve list of created products</title>
+                        <acl>integrator/product/listCreated</acl>
+                    </listCreated>
+                    <listUpdated translate="title" module="rmointegrator">
+                        <title>Retrieve list of updated products</title>
+                        <acl>integrator/product/listUpdated</acl>
+                    </listUpdated>
+                    <listDeleted translate="title" module="rmointegrator">
+                        <title>Retrieve list of delted products</title>
+                        <acl>integrator/product/listDeleted</acl>
+                    </listDeleted>
+                    <listCreatedCount translate="title" module="rmointegrator">
+                        <title>Count number of created products</title>
+                        <acl>integrator/product/listCreatedCount</acl>
+                    </listCreatedCount>
+                    <listUpdatedCount translate="title" module="rmointegrator">
+                        <title>Count number of updated products</title>
+                        <acl>integrator/product/listUpdatedCount</acl>
+                    </listUpdatedCount>
+                    <listDeletedCount translate="title" module="rmointegrator">
+                        <title>Count number of updated products</title>
+                        <acl>integrator/product/listDeletedCount</acl>
+                    </listDeletedCount>
+                    <confirmListCreatedReceived translate="title" module="rmointegrator">
+                        <title>Confirms that the integrator has received the created products</title>
+                        <acl>integrator/product/confirmListCreatedReceived</acl>
+                    </confirmListCreatedReceived>
+                    <confirmListUpdatedReceived translate="title" module="rmointegrator">
+                        <title>Confirms that the integrator has received the updated products</title>
+                        <acl>integrator/product/confirmListUpdatedReceived</acl>
+                    </confirmListUpdatedReceived>
+                    <confirmListDeletedReceived translate="title" module="rmointegrator">
+                        <title>Confirms that the integrator has received the updated products</title>
+                        <acl>integrator/product/confirmListDeletedReceived</acl>
+                    </confirmListDeletedReceived>
+                </methods>
+            </integrator_product>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+                <integrator_product>integratorProduct</integrator_product>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <integrator translate="title" module="rmointegrator">
+                    <title>RMO Integrator</title>
+                    <sort_order>2000</sort_order> 
+                    <product translate="title" module="rmointegrator">
+                        <title>Product</title>
+                        <listCreated translate="title" module="rmointegrator">
+                            <title>List created products</title>
+                        </listCreated>  
+                        <listUpdated translate="title" module="rmointegrator">
+                            <title>List updated products</title>
+                        </listUpdated>
+                        <listDeleted translate="title" module="rmointegrator">
+                            <title>List deleted products</title>
+                        </listDeleted>
+                        <listCreatedCount translate="title" module="rmointegrator">
+                            <title>Count number of created products</title>
+                        </listCreatedCount>
+                        <listUpdatedCount translate="title" module="rmointegrator">
+                            <title>Count number of updated products</title>
+                        </listUpdatedCount>
+                        <listDeletedCount translate="title" module="rmointegrator">
+                            <title>Count number of deleted products</title>
+                        </listDeletedCount>
+                        <confirmListCreatedReceived translate="title" module="rmointegrator">
+                            <title>Confirms that the integrator has received the created products</title>
+                        </confirmListCreatedReceived>
+                        <confirmListUpdatedReceived translate="title" module="rmointegrator">
+                            <title>Confirms that the integrator has received the updated products</title>
+                        </confirmListUpdatedReceived>
+                        <confirmListDeletedReceived translate="title" module="rmointegrator">
+                            <title>Confirms that the integrator has received the deleted products</title>
+                        </confirmListDeletedReceived>
+                    </product>                   
+                </integrator>
+            </resources>
+        </acl>
+    </api>
+</config>

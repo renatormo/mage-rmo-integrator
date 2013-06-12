@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <RMO_Integrator>
+            <active>true</active>
+            <codePool>local</codePool>
+        </RMO_Integrator>
+    </modules>
+</config>

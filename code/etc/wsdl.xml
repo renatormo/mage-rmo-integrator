@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+                <complexType name="integratorPaginationEntity">
+                    <all>
+                        <element name="curPage" type="xsd:string" minOccurs="0"/>
+                        <element name="pageSize" type="xsd:string" minOccurs="0"/>
+                    </all>
+                </complexType>
+                <complexType name="integratorConfigurableAttribute"> 
+                    <all>
+                        <element name="attribute_code" type="xsd:string"/>
+                        <element name="attribute_name" type="xsd:string"/>
+                    </all>
+                </complexType>
+                <complexType name="integratorConfigurableAttributeArray">
+                    <complexContent>
+                        <restriction base="soapenc:Array">
+                            <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:integratorConfigurableAttribute[]" />
+                        </restriction>
+                    </complexContent>
+                </complexType>
+                <complexType name="integratorConfigurableProductVariation"> 
+                    <all>
+                        <element name="associated_product_id" type="xsd:string"/>
+                        <element name="attributes" type="typens:associativeArray"/>
+                    </all>
+                </complexType>
+                <complexType name="integratorConfigurableProductVariationArray"> 
+                    <complexContent>
+                        <restriction base="soapenc:Array">
+                            <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:integratorConfigurableProductVariation[]" />
+                        </restriction>
+                    </complexContent>
+                </complexType>
+                <complexType name="integratorConfigurableAttributeArray">
+                    <complexContent>
+                        <restriction base="soapenc:Array">
+                            <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:integratorConfigurableAttribute[]" />
+                        </restriction>
+                    </complexContent>
+                </complexType>
+                <complexType name="integratorProductReturnEntity">
+                    <all>
+                        <element name="attributes" type="typens:associativeArray" minOccurs="0"/>
+                        <element name="configurable_attributes" type="typens:integratorConfigurableAttributeArray" minOccurs="0"/>
+                        <element name="variations" type="typens:integratorConfigurableProductVariationArray" minOccurs="0"/>
+                    </all>
+            </complexType>
+            <complexType name="integratorProductReturnEntityArray">
+                    <complexContent>
+                        <restriction base="soapenc:Array">
+                            <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:integratorProductReturnEntity[]" />
+                        </restriction>
+                    </complexContent>
+                </complexType>
+        </schema>
+    </types>
+    <message name="integratorProductListCreatedRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="curPage" type="xsd:string" />
+        <part name="pageSize" type="xsd:string" />
+    </message>
+    <message name="integratorProductListCreatedResponse">
+        <part name="result" type="typens:integratorProductReturnEntityArray" />
+    </message>
+    <message name="integratorProductListDeletedRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="curPage" type="xsd:string" />
+        <part name="pageSize" type="xsd:string" />
+    </message>
+    <message name="integratorProductListDeletedResponse">
+        <part name="deletedSkus" type="typens:ArrayOfString" />
+    </message>
+    <message name="integratorProductListCountRequest">
+        <part name="sessionId" type="xsd:string" />
+    </message>
+    <message name="integratorProductListCountResponse">
+        <part name="count" type="xsd:string" />
+    </message>
+    <message name="integratorProductConfirmListReceivedRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="receivedSkus" type="typens:ArrayOfString" />
+    </message>
+    <message name="integratorProductConfirmListReceivedResponse">
+        <part name="result" type="xsd:string" />
+    </message>
+    <portType name="{{var wsdl.handler}}PortType">
+        <operation name="integratorProductListCreated">
+            <documentation>Returns the created products</documentation>
+            <input message="typens:integratorProductListCreatedRequest" />
+            <output message="typens:integratorProductListCreatedResponse" />
+        </operation>
+        <operation name="integratorProductListUpdated">
+            <documentation>Returns the updated products</documentation>
+            <input message="typens:integratorProductListCreatedRequest" />
+            <output message="typens:integratorProductListCreatedResponse" />
+        </operation>
+        <operation name="integratorProductListDeleted">
+            <documentation>Returns the deleted product's skus</documentation>
+            <input message="typens:integratorProductListDeletedRequest"/>
+            <output message="typens:integratorProductListDeletedResponse"/>
+        </operation>
+        <operation name="integratorProductListCreatedCount">
+            <documentation>Returns the number of products created.</documentation>
+            <input message="typens:integratorProductListCountRequest"/>
+            <output message="typens:integratorProductListCountResponse"/>
+        </operation>
+        <operation name="integratorProductListUpdatedCount">
+            <documentation>Returns the number of updated products</documentation>
+            <input message="typens:integratorProductListCountRequest"/>
+            <output message="typens:integratorProductListCountResponse"/>
+        </operation>
+        <operation name="integratorProductListDeletedCount">
+            <documentation>Returns the number of deleted products</documentation>
+            <input message="typens:integratorProductListCountRequest"/>
+            <output message="typens:integratorProductListCountResponse"/>
+        </operation>
+        <operation name="integratorProductConfirmListCreatedReceived">
+            <documentation>Confirms that the integrator has received the created products</documentation>
+            <input message="typens:integratorProductConfirmListReceivedRequest"/>
+            <output message="typens:integratorProductConfirmListReceivedResponse"/>
+        </operation>
+        <operation name="integratorProductConfirmListUpdatedReceived">
+            <documentation>Confirms that the integrator has received the updated products</documentation>
+            <input message="typens:integratorProductConfirmListReceivedRequest"/>
+            <output message="typens:integratorProductConfirmListReceivedResponse"/>
+        </operation>
+        <operation name="integratorProductConfirmListDeletedReceived">
+            <documentation>Confirms that the integrator has received the deleted products</documentation>
+            <input message="typens:integratorProductConfirmListReceivedRequest"/>
+            <output message="typens:integratorProductConfirmListReceivedResponse"/>
+        </operation>
+    </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="integratorProductListCreated">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductListUpdated">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+         <operation name="integratorProductListDeleted">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductListCreatedCount">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductListUpdatedCount">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductListDeletedCount">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductConfirmListCreatedReceived">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductConfirmListUpdatedReceived">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="integratorProductConfirmListDeletedReceived">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+    <service name="{{var wsdl.name}}Service">
+        <port name="{{var wsdl.handler}}Port" binding="typens:{{var wsdl.handler}}Binding">
+            <soap:address location="{{var wsdl.url}}" />
+        </port>
+    </service>
+</definitions>
